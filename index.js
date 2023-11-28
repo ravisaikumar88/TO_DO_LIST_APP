@@ -14,12 +14,16 @@ const addButtonEl = document.getElementById("add-button")
 const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
-    let inputValue = inputFieldEl.value
+    let inputValue = inputFieldEl.value.trim(); // Trim to remove leading and trailing whitespaces
     
-    push(shoppingListInDB, inputValue)
-    
-    clearInputFieldEl()
-})
+    if (inputValue !== "") {
+        push(shoppingListInDB, inputValue);
+        clearInputFieldEl();
+    } else {
+        alert("Please enter a valid item before adding to the list.");
+    }
+});
+
 
 onValue(shoppingListInDB, function(snapshot) {
     if(snapshot.exists()){
