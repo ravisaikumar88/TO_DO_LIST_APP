@@ -60,10 +60,14 @@ function appendItemToShoppingListEl(item) {
     
     newEl.textContent = itemValue
 
-    newEl.addEventListener("dblclick",function(){
-        let exactLocationOfItemInDB = ref(database,`shoppingList/${itemID}`)
-        remove(exactLocationOfItemInDB)
-    })
+    newEl.addEventListener("dblclick", function () {
+        let confirmDelete = confirm("Are you sure you want to delete this item?");
+        
+        if (confirmDelete) {
+            let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
+            remove(exactLocationOfItemInDB);
+        }
+    });
     
     shoppingListEl.append(newEl)
 }
